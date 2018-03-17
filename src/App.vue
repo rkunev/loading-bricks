@@ -1,63 +1,66 @@
 <template>
-    <div class="scene" ref="scene">
-        <img src="/static/pillar.svg" data-index="13">
-        <img src="/static/pillar.svg" data-index="14">
-        <img src="/static/pillar.svg" data-index="15">
-        <img src="/static/pillar.svg" data-index="16">
-        <img src="/static/pillar.svg" data-index="1">
+    <div id="app" class="scene">
+        <img src="/pillar.svg" data-index="13">
+        <img src="/pillar.svg" data-index="14">
+        <img src="/pillar.svg" data-index="15">
+        <img src="/pillar.svg" data-index="16">
+        <img src="/pillar.svg" data-index="1">
 
-        <img src="/static/pillar.svg" data-index="2">
-        <img src="/static/pillar.svg" data-index="3">
-        <img src="/static/pillar.svg" data-index="4">
-        <img src="/static/pillar.svg" data-index="5">
+        <img src="/pillar.svg" data-index="2">
+        <img src="/pillar.svg" data-index="3">
+        <img src="/pillar.svg" data-index="4">
+        <img src="/pillar.svg" data-index="5">
 
-        <img src="/static/pillar.svg" data-index="6">
-        <img src="/static/pillar.svg" data-index="7">
-        <img src="/static/pillar.svg" data-index="8">
-        <img src="/static/pillar.svg" data-index="9">
+        <img src="/pillar.svg" data-index="6">
+        <img src="/pillar.svg" data-index="7">
+        <img src="/pillar.svg" data-index="8">
+        <img src="/pillar.svg" data-index="9">
 
-        <img src="/static/pillar.svg" data-index="10">
-        <img src="/static/pillar.svg" data-index="11">
-        <img src="/static/pillar.svg" data-index="12">
+        <img src="/pillar.svg" data-index="10">
+        <img src="/pillar.svg" data-index="11">
+        <img src="/pillar.svg" data-index="12">
     </div>
 </template>
 
 <script>
-export default {
-    name: 'app',
-    mounted() {
-        const scene = this.$refs.scene;
-        const pillars = [...scene.children].sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+    import { TweenMax } from 'gsap';
 
-        this.animateScene(scene);
-        this.animatePillars(pillars);
-    },
-    methods: {
-        animateScene(scene) {
-            const duration = 2.649;
-            const config = {
-                y: '+=40',
-                ease: Linear.easeNone,
-                onComplete: this.animateScene,
-                onCompleteParams: [scene],
-                // @hack Firefox janks when animating elements in small increments
-                rotation: 0.01,
-            };
+    export default {
+        name: 'app',
+        mounted() {
+            const pillars = Array.from(this.$el.children).sort((a, b) => {
+                return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+            });
 
-            TweenMax.to(scene, duration, config);
+            this.animateScene(this.$el);
+            this.animatePillars(pillars);
         },
-        animatePillars(pillars) {
-            const duration = 0.15;
-            const config = { ease: Linear.easeNone, y: '-=40', delay: 1 };
-            const overlap = 0.1;
+        methods: {
+            animateScene(scene) {
+                const duration = 2.649;
+                const config = {
+                    y: '+=40',
+                    ease: Linear.easeNone,
+                    onComplete: this.animateScene,
+                    onCompleteParams: [scene],
+                    // @hack Firefox janks when animating elements in small increments
+                    rotation: 0.01,
+                };
 
-            TweenMax.staggerTo(pillars, duration, config, overlap, this.animatePillars, [pillars]);
+                TweenMax.to(scene, duration, config);
+            },
+            animatePillars(pillars) {
+                const duration = 0.15;
+                const config = { ease: Linear.easeNone, y: '-=40', delay: 1 };
+                const overlap = 0.1;
+
+                TweenMax.staggerTo(pillars, duration, config, overlap, this.animatePillars, [pillars]);
+            },
         },
-    },
-    beforeDestroy() {
-        TweenMax.killAll();
-    }
-}
+        beforeDestroy() {
+            TweenMax.killAll();
+        },
+    };
 </script>
 
 <style>
