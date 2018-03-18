@@ -1,18 +1,22 @@
-# loading-bricks
+# Columns dribbble shot becomes alive
 
-> A Vue.js project
+<p align="center"><img width="250" src="./screenshots/thumb.png"  alt="screenshot"></p>
 
-## Build Setup
+## Links
 
-``` bash
+*   [Demo](https://rkunev.github.io/loading-bricks)
+*   [Imgur](https://i.imgur.com/LR2rrQG.gifv)
+*   Credits: [Columns](https://dribbble.com/shots/3016822-Columns) - by [Dave Whyte](https://dribbble.com/beesandbombs)
+
+## Quick Setup
+
+```bash
 # install dependencies
-npm install
+yarn
 
-# serve with hot reload at localhost:8080
-npm run dev
+# serve with `watch` mode at localhost:5000
+yarn dev
 
 # build for production with minification
-npm run build
+yarn build
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
