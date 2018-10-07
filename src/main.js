@@ -1,4 +1,4 @@
-import TweenMax from 'gsap/TweenMax';
+import { TweenMax, Linear } from 'gsap/TweenMax';
 
 const animateScene = scene => {
     const duration = 2.649;
